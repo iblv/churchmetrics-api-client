@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  web:
+    build: .
+    command: bundle exec ruby main.rb
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - RACK_ENV=development
