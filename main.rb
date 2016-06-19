@@ -7,6 +7,7 @@ set :logging, STDERR
 set :bind, '0.0.0.0'
 set :port, ENV['PORT']
 set :json_content_type, :js
+set :allow_origin, "*"
 
 module ChurchMetricsApiClientHelpers
   def production?
@@ -17,6 +18,8 @@ end
 helpers ChurchMetricsApiClientHelpers
 
 before do
+  headers 'Access-Control-Allow-Origin' => '*'
+  headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS'
   cache_control :public, :must_revalidate, :max_age => 36000 if production?
   @client = ChurchMetricsApiClient.new
 end
