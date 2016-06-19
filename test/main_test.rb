@@ -18,4 +18,10 @@ class MainTest < Minitest::Test
     assert last_response.ok?
     assert last_response.body.include?("\"day_of_week\":0,\"time_of_day\":\"2000-01-01T10:00:00")
   end
+
+  def test_not_found
+    get '/'
+    assert last_response.not_found?
+    assert_equal 'Page not found.', last_response.body
+  end
 end

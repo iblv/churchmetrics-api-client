@@ -28,3 +28,7 @@ end
 get '/services' do
   json @client.services
 end
+
+not_found do
+  'Page not found.'
+end
