@@ -8,7 +8,16 @@ set :bind, '0.0.0.0'
 set :port, ENV['PORT']
 set :json_content_type, :js
 
+module ChurchMetricsApiClientHelpers
+  def production?
+    ENV['RACK_ENV'] == 'production'
+  end
+end
+
+helpers ChurchMetricsApiClientHelpers
+
 before do
+  cache_control :public, :must_revalidate, :max_age => 36000 if production?
   @client = ChurchMetricsApiClient.new
 end
 
