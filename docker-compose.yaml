@@ -3,7 +3,7 @@ version: '2'
 services:
   web:
     build: .
-    command: bundle exec ruby main.rb
+    command: foreman start
     volumes:
       - .:/app
     ports:
@@ -11,3 +11,5 @@ services:
     environment:
       - PORT=3000
       - RACK_ENV=development
+      - CHURCH_METRICS_USER
+      - CHURCH_METRICS_KEY

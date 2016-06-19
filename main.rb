@@ -1,19 +1,21 @@
 require 'sinatra'
-require 'sinatra/contrib'
 require "sinatra/reloader" if development?
 require "sinatra/json"
+require "./lib/churchmetrics_api_client"
 
 set :logging, STDERR
 set :bind, '0.0.0.0'
 set :port, ENV['PORT']
 set :json_content_type, :js
 
-get '/' do
-  json ["Hello World!"]
+before do
+  @client = ChurchMetricsApiClient.new
 end
 
-get 'igrejas' do
+get '/churchs' do
+  json @client.churchs
 end
 
-get 'cultos' do
+get '/services' do
+  json @client.services
 end
